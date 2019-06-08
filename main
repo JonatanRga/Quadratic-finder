@@ -1,0 +1,38 @@
+x0 = 1
+y0 = 1
+p = 0.5
+q = 0
+print ('sent parameters are following: (x=%f,y=%f), p=%f, q=%f' %(x0, y0 , p , q ))
+
+#==================================================================
+def Find_inv_quadratic_func(x0, y0, p, q):
+    try:
+        a = -y0/ ( (p-x0)*((2+x0)-2*p) )
+        b = -2*a*p
+        c =1 #q + p*p
+        print (' function found!\n', 'parameters are following: \n','a=%f, b=%f, c=%f' % (a,b,c))
+        return (a, b, c)
+    except:
+        print ('cannot find function for given parameters')
+
+def Quadratic_func(a,b,c,x):
+    y = a*x*x + b*x+ c
+    return y
+
+def Checker():
+    yq = Quadratic_func(a,b,c,p)
+    yx = Quadratic_func(a,b,c,x0)
+    y0 = Quadratic_func(a,b,c,0)
+    print ('f(p)=%f    f(x0)=%f   f(0)=%f' %(yq,yx,y0) )
+    x = np.arange(-1, 1.5, 0.01)
+    y = Quadratic_func(a,b,c,x)
+    plt.plot(x,y)
+    plt.show()
+    
+#==================================================================
+
+param_quadratic_func = ( Find_inv_quadratic_func(x0,y0,p,q) )
+a = param_quadratic_func[0]
+b = param_quadratic_func[1]
+c = param_quadratic_func[2]
+Checker()
