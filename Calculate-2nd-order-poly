@@ -1,0 +1,61 @@
+class Polynomial:
+    def __init__(self, *args):                      # magical base method 
+        self.degree=len(args)-1
+        print ('polynomial degree:', self.degree)
+        print ('polynomial constans are following: ')
+        for i in range(0, (self.degree+1)):
+            print('a(',i,'): ', args[i])
+    
+    def __str__(self):                              # this magical method returns values as an string, whenever use string outside of class we use this method by deflaut in python 3.5
+        print ('str poly') 
+        name = "Polynomial: " + str(self.poly)
+        return name
+    
+    def __del__(self):                              # to save memory we use garbage magical method collector
+        print('memory cleaned')
+
+class Roots(Polynomial):                            # this class will check level of polynomial and find roots
+    def __init__(self, *args):
+        super().__init__(*args)                     #special function to run and collect __init__ from another class and give it arguments
+
+        if (self.degree > 2):
+            print ("polynomial higher level than two, will not count roots...")
+        else:
+            if (self.degree == 2):
+                print('calculating roots poly lvl 2')
+                delta =  args[1]**2 -4*args[2]*args[0]
+                print ('delta: ', delta)
+                if delta > 0:
+                    print('two real solutions')
+                    x1= (- args[1] - delta)/(2*args[2])
+                    x2= (- args[1] + delta)/(2*args[2])
+                    print('roots are following: ')
+                    print('x1: ', x1)
+                    print ('x2: ', x2)
+                
+                elif delta == 0:
+                    print('one real solution')
+                    x0= (- args[1] )/(2*args[2])
+                    print('root is following: ')
+                    print('x0: ', x0)
+                else:
+                    print('two imaginary solutions')
+                    delta = complex((delta**(0.5)))
+                    x1= (- args[1] - delta)/(2*args[2])
+                    x2= (- args[1] + delta)/(2*args[2])
+                    print('roots are following: ')
+                    print('x1: ', x1)
+                    print ('x2: ', x2)
+
+            elif (self.degree == 1):
+                print('calculating poly lvl 1')
+                x0 = -args[0]/args[1]
+                print('x0 = ', x0)
+            elif (self.degree == 0):
+                print ('asking for a roots make no sense here')
+            else:
+                print ('empty poly')
+
+
+poly = [2, -3.3, 1] #type a, b, c
+Roots(poly)
